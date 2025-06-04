@@ -1,0 +1,3 @@
+# Ignore product images. Keep placeholder file
+public/img/*
+!public/img/.gitkeep
