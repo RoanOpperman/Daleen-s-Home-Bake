@@ -47,6 +47,26 @@ const server = http.createServer((req, res) => {
         res.end('Server error');
       }
     });
+  } else if (req.method === 'POST' && req.url === '/api/contact') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const msg = JSON.parse(body);
+        const file = path.join(__dirname, 'messages.json');
+        let messages = [];
+        if (fs.existsSync(file)) {
+          messages = JSON.parse(fs.readFileSync(file));
+        }
+        messages.push(msg);
+        fs.writeFileSync(file, JSON.stringify(messages, null, 2));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'ok' }));
+      } catch (e) {
+        res.writeHead(500);
+        res.end('Server error');
+      }
+    });
   } else {
     res.writeHead(404);
     res.end('Not Found');

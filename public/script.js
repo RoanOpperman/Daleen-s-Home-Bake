@@ -65,6 +65,15 @@ contactForm.addEventListener('submit', (e) => {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
-    alert('Thank you for reaching out, ' + name + '!');
-    contactForm.reset();
+    fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+    })
+    .then(res => res.json())
+    .then(() => {
+        alert('Thank you for reaching out, ' + name + '!');
+        contactForm.reset();
+    })
+    .catch(err => alert('Error: ' + err));
 });
