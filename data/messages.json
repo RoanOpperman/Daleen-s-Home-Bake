@@ -3,5 +3,10 @@
     "name": "User",
     "email": "u@example.com",
     "message": "Hi"
+  },
+  {
+    "name": "Test",
+    "email": "t@example.com",
+    "message": "Hello"
   }
 ]

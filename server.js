@@ -23,6 +23,8 @@ function serveStatic(filePath, res) {
   });
 }
 
+const publicDir = path.join(__dirname, 'public');
+
 const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     if (req.url === '/api/messages') {
@@ -38,7 +40,12 @@ const server = http.createServer((req, res) => {
       return res.end(data);
     }
 
-    let filePath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url);
+    const reqPath = req.url.split('?')[0];
+    let filePath = path.normalize(path.join(publicDir, reqPath === '/' ? 'index.html' : reqPath));
+    if (!filePath.startsWith(publicDir)) {
+      res.writeHead(403);
+      return res.end('Forbidden');
+    }
     serveStatic(filePath, res);
   } else if (req.method === 'POST' && req.url === '/api/order') {
     let body = '';
