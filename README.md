@@ -46,7 +46,8 @@ brownie.png
 ```
 
 As long as these names match, the site will load the images from your local
-machine without uploading them anywhere.
+machine without uploading them anywhere. If an image is missing, a gray
+placeholder is shown automatically so the page layout remains intact.
 
 ## Limitations
 

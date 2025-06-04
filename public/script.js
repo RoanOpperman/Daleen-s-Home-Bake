@@ -14,11 +14,12 @@ const cart = [];
 
 function renderProducts() {
     const list = document.getElementById('product-list');
+    const placeholder = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+AMAAwAB/9omsAAAAABJRU5ErkJggg==';
     products.forEach(p => {
         const div = document.createElement('div');
         div.className = 'product';
         div.innerHTML = `
-            <img src="${p.image}" alt="${p.name}">
+            <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='${placeholder}'">
             <h3>${p.name}</h3>
             <p>$${p.price.toFixed(2)}</p>
             <button onclick="addToCart(${p.id})">Add to Cart</button>`;
