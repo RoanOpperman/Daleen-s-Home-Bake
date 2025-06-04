@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleen's Home Bake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Deleen's Home Bake</h1>
+        <section class="products">
+            <div class="product">
+                <img src="public/img/chocolate-cake.jpg" alt="Chocolate Cake">
+                <h3>Chocolate Cake</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/lemon-tart.jpg" alt="Lemon Tart">
+                <h3>Lemon Tart</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/banana-bread.jpg" alt="Banana Bread">
+                <h3>Banana Bread</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/blueberry-muffin.jpg" alt="Blueberry Muffin">
+                <h3>Blueberry Muffin</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/croissant.jpg" alt="Croissant">
+                <h3>Croissant</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/apple-pie.jpg" alt="Apple Pie">
+                <h3>Apple Pie</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/carrot-cake.jpg" alt="Carrot Cake">
+                <h3>Carrot Cake</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/cheesecake.jpg" alt="Cheesecake">
+                <h3>Cheesecake</h3>
+            </div>
+            <div class="product">
+                <img src="public/img/brownie.jpg" alt="Brownie">
+                <h3>Brownie</h3>
+            </div>
+        </section>
+
+        <section class="order">
+            <h2>Place an Order</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="order-name">Name</label><br>
+                    <input type="text" id="order-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="order-email">Email</label><br>
+                    <input type="email" id="order-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="product">Product</label><br>
+                    <select id="product" name="product">
+                        <option>Chocolate Cake</option>
+                        <option>Lemon Tart</option>
+                        <option>Banana Bread</option>
+                        <option>Blueberry Muffin</option>
+                        <option>Croissant</option>
+                        <option>Apple Pie</option>
+                        <option>Carrot Cake</option>
+                        <option>Cheesecake</option>
+                        <option>Brownie</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label><br>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+                </div>
+                <button type="submit">Order</button>
+            </form>
+            <p id="orderMessage" class="status"></p>
+        </section>
+
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label><br>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label><br>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Send</button>
+            </form>
+            <p id="contactMessage" class="status"></p>
+        </section>
+    </div>
+
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            })
+        });
+        if (res.ok) {
+            document.getElementById('contactMessage').textContent = 'Message sent!';
+            e.target.reset();
+        }
+    });
+
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const res = await fetch('/api/order', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: document.getElementById('order-name').value,
+                email: document.getElementById('order-email').value,
+                product: document.getElementById('product').value,
+                quantity: document.getElementById('quantity').value
+            })
+        });
+        if (res.ok) {
+            document.getElementById('orderMessage').textContent = 'Order received!';
+            e.target.reset();
+        }
+    });
+    </script>
+</body>
+</html>
