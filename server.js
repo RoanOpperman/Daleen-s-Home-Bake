@@ -1,42 +1,78 @@
-const express = require('express');
+const http = require('http');
+const fs = require('fs');
 const path = require('path');
-const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(express.static(__dirname));
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
 const messages = [];
 const orders = [];
 
-app.post('/api/contact', (req, res) => {
-  messages.push({
-    name: req.body.name,
-    email: req.body.email,
-    message: req.body.message,
-    date: new Date().toISOString()
+function serveFile(res, filePath, contentType) {
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      res.writeHead(404);
+      res.end('Not found');
+      return;
+    }
+    res.writeHead(200, {'Content-Type': contentType});
+    res.end(data);
   });
-  res.json({status: 'ok'});
-});
+}
 
-app.post('/api/order', (req, res) => {
-  orders.push({
-    name: req.body.name,
-    email: req.body.email,
-    product: req.body.product,
-    quantity: req.body.quantity,
-    date: new Date().toISOString()
+function handlePost(req, res, array) {
+  let body = '';
+  req.on('data', chunk => body += chunk);
+  req.on('end', () => {
+    try {
+      const data = JSON.parse(body);
+      array.push({...data, date: new Date().toISOString()});
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.end(JSON.stringify({status: 'ok'}));
+    } catch {
+      res.writeHead(400);
+      res.end('Bad request');
+    }
   });
-  res.json({status: 'ok'});
+}
+
+const server = http.createServer((req, res) => {
+  if (req.method === 'GET') {
+    if (req.url === '/' || req.url === '/index.html') {
+      return serveFile(res, path.join(__dirname, 'index.html'), 'text/html');
+    }
+    if (req.url === '/style.css') {
+      return serveFile(res, path.join(__dirname, 'style.css'), 'text/css');
+    }
+    if (req.url.startsWith('/public/img/')) {
+      const imgPath = path.join(__dirname, req.url);
+      const ext = path.extname(imgPath).substring(1);
+      return serveFile(res, imgPath, `image/${ext}`);
+    }
+    if (req.url === '/admin') {
+      let html = '<h1>Admin Panel</h1>';
+      html += '<h2>Orders</h2><ul>' + orders.map(o => `<li>${o.date} - ${o.name} ordered ${o.quantity} ${o.product}(s)</li>`).join('') + '</ul>';
+      html += '<h2>Messages</h2><ul>' + messages.map(m => `<li>${m.date} - ${m.name} (${m.email}): ${m.message}</li>`).join('') + '</ul>';
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end(html);
+      return;
+    }
+    res.writeHead(404);
+    res.end('Not found');
+  } else if (req.method === 'POST') {
+    if (req.url === '/api/contact') {
+      return handlePost(req, res, messages);
+    }
+    if (req.url === '/api/order') {
+      return handlePost(req, res, orders);
+    }
+    res.writeHead(404);
+    res.end('Not found');
+  } else {
+    res.writeHead(405);
+    res.end('Method not allowed');
+  }
 });
 
-app.get('/admin', (req, res) => {
-  let html = '<h1>Admin Panel</h1>'; 
-  html += '<h2>Orders</h2><ul>' + orders.map(o => `<li>${o.date} - ${o.name} ordered ${o.quantity} ${o.product}(s)</li>`).join('') + '</ul>';
-  html += '<h2>Messages</h2><ul>' + messages.map(m => `<li>${m.date} - ${m.name} (${m.email}): ${m.message}</li>`).join('') + '</ul>';
-  res.send(html);
-});
-
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

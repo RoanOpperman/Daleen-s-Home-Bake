@@ -15,10 +15,9 @@ A small site for showcasing bakery products. Product images should be placed in
 
 ## Running
 
-Install dependencies and start the local server:
+Start the local server using Node.js:
 
 ```bash
-npm install
 node server.js
 ```
 
