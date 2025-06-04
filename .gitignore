@@ -1,0 +1,3 @@
+# Ignore product images. Add your own files locally under public/img/
+public/img/*
+!public/img/.gitkeep
