@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "items": [
+      {
+        "id": 3,
+        "name": "Banana Bread",
+        "price": 8
+      }
+    ]
+  }
+]
