@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 header, footer {
     background-color: #f2a8b8;
@@ -15,6 +16,12 @@ main {
 #products, #cart, #contact {
     margin-bottom: 2em;
 }
+.product-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    justify-items: center;
+}
 .product {
     border: 1px solid #ddd;
     padding: 1em;
@@ -26,4 +33,28 @@ button {
     border: none;
     padding: 0.5em 1em;
     cursor: pointer;
+}
+
+/* Testimonials */
+#testimonials {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 1em 0;
+}
+
+.testimonial-track {
+    display: inline-flex;
+    animation: scroll 20s linear infinite;
+}
+
+.testimonial {
+    background: #f9d9e1;
+    border-radius: 20px;
+    padding: 1em;
+    margin: 0 1em;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }

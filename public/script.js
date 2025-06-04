@@ -1,7 +1,13 @@
 const products = [
     { id: 1, name: 'Chocolate Cake', price: 15 },
     { id: 2, name: 'Lemon Tart', price: 12 },
-    { id: 3, name: 'Banana Bread', price: 8 }
+    { id: 3, name: 'Banana Bread', price: 8 },
+    { id: 4, name: 'Blueberry Muffin', price: 5 },
+    { id: 5, name: 'Croissant', price: 4 },
+    { id: 6, name: 'Apple Pie', price: 10 },
+    { id: 7, name: 'Carrot Cake', price: 14 },
+    { id: 8, name: 'Cheesecake', price: 16 },
+    { id: 9, name: 'Brownie', price: 3 }
 ];
 
 const cart = [];

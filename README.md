@@ -1,6 +1,6 @@
 # Deleen's Home Bake
 
-A simple online bakery store built with Node.js and vanilla JavaScript. It lists products, allows visitors to place orders and send messages through a contact form. Orders and messages are stored in JSON files.
+A simple online bakery store built with Node.js and vanilla JavaScript. It lists products in a three-column grid, loops customer testimonials across the top, and allows visitors to place orders and send messages through a contact form. Orders and messages are stored in JSON files.
 
 ## Getting Started
 
