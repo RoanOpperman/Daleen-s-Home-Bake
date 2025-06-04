@@ -15,32 +15,32 @@
         <h2>Our Products</h2>
         <div class="products-grid">
             <div class="product">
-                <img src="img/chocolate-cake.jpg" alt="Chocolate Cake">
+                <img src="/public/img/chocolate-cake.png" alt="Product 1">
                 <h3>Chocolate Cake</h3>
                 <p class="price">$25.00</p>
             </div>
             <div class="product">
-                <img src="img/blueberry-muffins.jpg" alt="Blueberry Muffins">
+                <img src="/public/img/blueberry-muffin.png" alt="Product 2">
                 <h3>Blueberry Muffins</h3>
                 <p class="price">$3.50 each</p>
             </div>
             <div class="product">
-                <img src="img/lemon-tart.jpg" alt="Lemon Tart">
+                <img src="/public/img/lemon-tart.png" alt="Product 3">
                 <h3>Lemon Tart</h3>
                 <p class="price">$5.00</p>
             </div>
             <div class="product">
-                <img src="img/banana-bread.jpg" alt="Banana Bread">
+                <img src="/public/img/bannana-bread-muffin.png" alt="Product 4">
                 <h3>Banana Bread</h3>
                 <p class="price">$7.00</p>
             </div>
             <div class="product">
-                <img src="img/carrot-cupcake.jpg" alt="Carrot Cupcake">
+                <img src="/public/img/carrot-cake.png" alt="Product 5">
                 <h3>Carrot Cupcake</h3>
                 <p class="price">$2.50 each</p>
             </div>
             <div class="product">
-                <img src="img/strawberry-cheesecake.jpg" alt="Strawberry Cheesecake">
+                <img src="/public/img/cheese-cake.png" alt="Product 6">
                 <h3>Strawberry Cheesecake</h3>
                 <p class="price">$30.00</p>
             </div>
@@ -49,7 +49,6 @@
 
     <section id="order">
         <h2>Place an Order</h2>
-
         <form action="mailto:owner@deleenshomebake.com" method="post" enctype="text/plain">
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required>
@@ -72,9 +71,7 @@
 
     <section id="contact">
         <h2>Talk to Us</h2>
-
         <form action="mailto:owner@deleenshomebake.com" method="post" enctype="text/plain">
-
             <label for="contact-name">Your Name:</label>
             <input type="text" id="contact-name" name="name" required>
 
@@ -87,42 +84,6 @@
             <button type="submit">Send Message</button>
         </form>
     </section>
-    <script>
-        document.getElementById('order-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const data = Object.fromEntries(new FormData(form));
-            const res = await fetch('/order', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            });
-            if (res.ok) {
-                alert('Order received!');
-                form.reset();
-            } else {
-                alert('Something went wrong.');
-            }
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const data = Object.fromEntries(new FormData(form));
-            const res = await fetch('/contact', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            });
-            if (res.ok) {
-                alert('Message sent!');
-                form.reset();
-            } else {
-                alert('Something went wrong.');
-            }
-        });
-    </script>
-
 </body>
 </html>
 

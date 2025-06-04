@@ -1,5 +1,6 @@
 # Deleen's Home Bake
 
+
 Simple website with a product catalog, order form, and contact form.
 
 ## Running locally
@@ -22,4 +23,6 @@ lemon-tart.jpg
 banana-bread.jpg
 carrot-cupcake.jpg
 strawberry-cheesecake.jpg
+
 ```
+
