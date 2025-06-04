@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleen's Home Bake</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Deleen's Home Bake</h1>
+    </header>
+
+    <section id="products">
+        <h2>Our Products</h2>
+        <div class="products-grid">
+            <div class="product">
+                <img src="https://via.placeholder.com/200" alt="Product 1">
+                <h3>Chocolate Cake</h3>
+                <p class="price">$25.00</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/200" alt="Product 2">
+                <h3>Blueberry Muffins</h3>
+                <p class="price">$3.50 each</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/200" alt="Product 3">
+                <h3>Lemon Tart</h3>
+                <p class="price">$5.00</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/200" alt="Product 4">
+                <h3>Banana Bread</h3>
+                <p class="price">$7.00</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/200" alt="Product 5">
+                <h3>Carrot Cupcake</h3>
+                <p class="price">$2.50 each</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/200" alt="Product 6">
+                <h3>Strawberry Cheesecake</h3>
+                <p class="price">$30.00</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="order">
+        <h2>Place an Order</h2>
+        <form action="mailto:owner@deleenshomebake.com" method="post" enctype="text/plain">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="product">Product:</label>
+            <input type="text" id="product" name="product" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+
+            <button type="submit">Submit Order</button>
+        </form>
+    </section>
+
+    <section id="contact">
+        <h2>Talk to Us</h2>
+        <form action="mailto:owner@deleenshomebake.com" method="post" enctype="text/plain">
+            <label for="contact-name">Your Name:</label>
+            <input type="text" id="contact-name" name="name" required>
+
+            <label for="contact-email">Email:</label>
+            <input type="email" id="contact-email" name="email" required>
+
+            <label for="contact-message">Message:</label>
+            <textarea id="contact-message" name="message" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+</body>
+</html>
+
